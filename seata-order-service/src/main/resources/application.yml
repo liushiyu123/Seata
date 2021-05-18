@@ -1,0 +1,67 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: io.seata.samples.entity
+  global-config:
+    db-config:
+      field-strategy: not-empty
+      id-type: auto
+      db-type: mysql
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    auto-mapping-unknown-column-behavior: none
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+seata:
+  enabled: true
+  application-id: seata-order-service
+  tx-service-group: my_test_tx_group
+  config:
+    type: nacos
+    nacos:
+      namespace:
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace:
+      username: "nacos"
+      password: "nacos"
+#
+#seata:
+#  enable-auto-data-source-proxy: true
+#  enabled: true
+#  application-id: seata-order-service
+#  tx-service-group: my_test_tx_group
+#  config:
+#    type: nacos
+#    nacos:
+#      namespace:
+#      serverAddr: 127.0.0.1:8848
+#      group: SEATA_GROUP
+#      userName: "nacos"
+#      password: "nacos"
+#  registry:
+#    type: nacos
+#    nacos:
+#      application: seata-server
+#      serverAddr: 127.0.0.1:8848
+#      group: SEATA_GROUP
+#      namespace:
+#      userName: "nacos"
+#      password: "nacos"

@@ -1,0 +1,35 @@
+seata:
+  enabled: true
+  application-id: seata-storage-service
+  tx-service-group: my_test_tx_group
+  config:
+    type: nacos
+    nacos:
+      namespace:
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace:
+      username: "nacos"
+      password: "nacos"
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_storage?useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  ribbon:
+    # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间
+    ReadTimeout: 5000
+    # 指的是建立连接后从服务器读取到可用资源所用的时间
+    ConnectTimeout: 5000
